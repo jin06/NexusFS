@@ -3,6 +3,7 @@ module github.com/jin06/NexusFS
 go 1.17
 
 require (
+	github.com/hanwen/go-fuse/v2 v2.3.0
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/viper v1.15.0
 )
