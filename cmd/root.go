@@ -17,6 +17,8 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/jin06/NexusFS/config"
+	"github.com/sirupsen/logrus"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -61,6 +63,15 @@ func init() {
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.AddCommand(serverCmd)
+	rootCmd.AddCommand(clientCmd)
+
+	level := viper.GetString("level")
+	logLvl, err := logrus.ParseLevel(level)
+	if err != nil {
+		logLvl = logrus.DebugLevel
+	}
+	logrus.SetLevel(logLvl)
 }
 
 // initConfig reads in config file and ENV variables if set.
@@ -77,6 +88,10 @@ func initConfig() {
 		viper.AddConfigPath(home)
 		viper.SetConfigType("yaml")
 		viper.SetConfigName(".NexusFS")
+	}
+
+	if err := viper.Unmarshal(config.Def); err != nil {
+		panic(err)
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match

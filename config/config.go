@@ -1,13 +1,17 @@
 package config
 
-type Role byte
+var Def *Config
 
-const (
-	Client Role = 0
-	Server Role = 1
-)
+func init() {
+	Def = &Config{
+		ClusterName: "nexus",
+		NodeName: "testNode",
+		Level:"info",
+	}
+}
 
 type Config struct {
-	Role       Role
-	ServerAddr string
+	ClusterName string `yaml:"cluster_name"`
+	NodeName    string `yaml:"node_name"`
+	Level       string `yaml:"level"`
 }
