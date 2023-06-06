@@ -1,7 +1,7 @@
 cluster_name: testCluster
-node_name: testA
+node_name: test1
 level: debug
-storage_type: lookback # lookback or db
-mountpoint: "/Users/jinlong/tmp/fs/nexus10"
-lookback_dir: "/Users/jinlong/tmp/fs/fsdata"
+storage_type: loopback # loopback or db
+mountpoint: "/Users/jinlong/tmp/fuse/nexus1"
+lookback_dir: "/Users/jinlong/tmp/fuse/data1"
 

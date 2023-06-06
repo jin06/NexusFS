@@ -8,15 +8,16 @@ type FSTYPE string
 
 const (
 	FSTYPE_DEFAULT   = ""
-	FSTYYPE_LOOKBACK = "lookback"
+	FSTYYPE_LOOPBACK = "loopback"
 	FSTYPE_DB        = "db"
+	FSTYPE_DEBUG     = "debug"
 )
 
 type Options struct {
 	MountPoint   string
 	FSType       FSTYPE
 	LookBackPath string
-	FuseName string
+	FuseName     string
 }
 
 func NewOptions(opt ...Option) Options {

@@ -1,0 +1,7 @@
+cluster_name: testClusterB
+node_name: testB
+level: debug
+storage_type: debug # lookback or db
+mountpoint: "/Users/jinlong/tmp/fs/nexus_debug"
+lookback_dir: "/Users/jinlong/tmp/fs/fsdata"
+
