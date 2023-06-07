@@ -1,0 +1,14 @@
+syntax = "proto3";
+option go_package = "github.com/jin06/NexusFS/api";
+
+service Hello {
+  rpc SayHello(HelloReq) returns (HelloResp) {}
+}
+
+message HelloReq {
+  string name = 1;
+}
+
+message HelloResp {
+  string reply = 1;
+}

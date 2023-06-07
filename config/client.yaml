@@ -4,4 +4,5 @@ level: debug
 storage_type: loopback # loopback or db
 mountpoint: "/Users/jinlong/tmp/fuse/nexus1"
 lookback_dir: "/Users/jinlong/tmp/fuse/data1"
-listen_address: :8880
+server_address: 127.0.0.1:8880
+
