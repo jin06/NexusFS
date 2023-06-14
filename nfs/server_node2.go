@@ -5,6 +5,7 @@ import (
 	"github.com/hanwen/go-fuse/v2/fs"
 	"github.com/hanwen/go-fuse/v2/fuse"
 	"github.com/jin06/NexusFS/api"
+	"github.com/jin06/NexusFS/manager/client"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"syscall"
@@ -12,6 +13,7 @@ import (
 
 type ServerNode struct {
 	fs.LoopbackNode
+	M *client.Manager
 }
 
 func (n *ServerNode) OnAdd(ctx context.Context) {

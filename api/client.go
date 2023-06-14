@@ -13,3 +13,12 @@ func NewClient(address string) (c HelloClient, err error) {
 	c = NewHelloClient(conn)
 	return
 }
+
+func NewFSC(address string) (c FSClient, err error) {
+	conn, err := grpc.Dial(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		return
+	}
+	c = NewFSClient(conn)
+	return
+}

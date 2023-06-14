@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/hanwen/go-fuse/v2/fs"
 	"github.com/hanwen/go-fuse/v2/fuse"
+	"github.com/jin06/NexusFS/manager/client"
 	"github.com/jin06/NexusFS/manager/server"
 	"github.com/sirupsen/logrus"
 	"os"
@@ -62,6 +63,12 @@ func New(opt ...Option) (sfs *ServerFS, err error) {
 		//if err != nil {
 		//	return
 		//}
+
+		manager,err := client.NewManager(client.Conf{})
+		if err != nil {
+			panic(err)
+		}
+		loopbackNewNode := loopbackNewNodeWrapper(manager)
 
 		rootData := &fs.LoopbackRoot{
 			Path:    opts.LookBackPath,

@@ -1,0 +1,17 @@
+syntax = "proto3";
+option go_package = "github.com/jin06/NexusFS/api";
+
+service FS {
+  rpc Mkdir(MkdirReq) returns(MkdirResp) {}
+}
+
+message MkdirReq {
+  string name = 1;
+  uint32 mode = 2;
+}
+
+message MkdirResp {
+  uint32 mode = 1;
+  uint64 ino = 2;
+  uint64 gen = 3;
+}
