@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"github.com/jin06/NexusFS/api"
+	"github.com/jin06/NexusFS/api/handlers"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -33,7 +34,10 @@ func runApiServer(addr string) (err error) {
 		return
 	}
 	srv := api.NewServer()
+	fsService := handlers.NewFS()
 	gServer := grpc.NewServer()
 	api.RegisterHelloServer(gServer, srv)
+	api.RegisterFSServer(gServer, fsService)
+
 	return gServer.Serve(listener)
 }

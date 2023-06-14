@@ -20,3 +20,4 @@ func (s *Server) SayHello(ctx context.Context, req *HelloReq) (*HelloResp, error
 	}
 	return resp, nil
 }
+
