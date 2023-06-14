@@ -64,7 +64,9 @@ func New(opt ...Option) (sfs *ServerFS, err error) {
 		//	return
 		//}
 
-		manager,err := client.NewManager(client.Conf{})
+		manager, err := client.NewManager(client.Conf{
+			sfs.Options.ServerAddr,
+		})
 		if err != nil {
 			panic(err)
 		}

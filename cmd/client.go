@@ -23,12 +23,14 @@ func runClient(cmd *cobra.Command, args []string) {
 	ld := viper.GetString("lookback_dir")
 	sType := viper.GetString("storage_type")
 	fuseName := config.Def.ClusterName + "_" + config.Def.NodeName
+	serverAddr := viper.GetString("server_address")
 
 	sfs, err := nfs.New(
 		nfs.MountPoint(mt),
 		nfs.LBPath(ld),
 		nfs.FSType(sType),
 		nfs.FuseName(fuseName),
+		nfs.ServerAddr(serverAddr),
 	)
 	if err != nil {
 		panic(err)

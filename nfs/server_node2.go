@@ -4,10 +4,8 @@ import (
 	"context"
 	"github.com/hanwen/go-fuse/v2/fs"
 	"github.com/hanwen/go-fuse/v2/fuse"
-	"github.com/jin06/NexusFS/api"
 	"github.com/jin06/NexusFS/manager/client"
 	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 	"syscall"
 )
 
@@ -44,16 +42,17 @@ var _ = (fs.NodeMkdirer)((*ServerNode)(nil))
 
 func (n *ServerNode) Mkdir(ctx context.Context, name string, mode uint32, out *fuse.EntryOut) (*fs.Inode, syscall.Errno) {
 	logrus.Debug("Mkdir testing: ", name)
-	c, er := api.NewClient(viper.GetString("server_address"))
-	if er != nil {
-		logrus.Error(er)
-	}
-	if rpl, err := c.SayHello(context.TODO(), &api.HelloReq{Name: name});err!= nil {
-		logrus.Error(err)
-	} else {
-		logrus.Debug(rpl.Reply)
-	}
-
+	//c, er := api.NewClient(viper.GetString("server_address"))
+	//if er != nil {
+	//	logrus.Error(er)
+	//}
+	//if rpl, err := c.SayHello(context.TODO(), &api.HelloReq{Name: name});err!= nil {
+	//	logrus.Error(err)
+	//} else {
+	//	logrus.Debug(rpl.Reply)
+	//}
+	i, g, err := n.M.Mkdir(ctx, name, mode)
+	logrus.Debug("test resp :", i, g, err)
 
 	return n.LoopbackNode.Mkdir(ctx, name, mode, out)
 }

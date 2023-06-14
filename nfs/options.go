@@ -18,6 +18,7 @@ type Options struct {
 	FSType       FSTYPE
 	LookBackPath string
 	FuseName     string
+	ServerAddr   string
 }
 
 func NewOptions(opt ...Option) Options {
@@ -50,5 +51,11 @@ func LBPath(s string) Option {
 func FuseName(s string) Option {
 	return func(options *Options) {
 		options.FuseName = s
+	}
+}
+
+func ServerAddr(s string) Option {
+	return func(options *Options) {
+		options.ServerAddr = s
 	}
 }
