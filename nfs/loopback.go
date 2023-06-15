@@ -17,7 +17,7 @@ import (
 
 func loopbackNewNodeWrapper(manager *client.Manager) func(*fs.LoopbackRoot, *fs.Inode, string, *syscall.Stat_t) fs.InodeEmbedder {
 	return func(rootData *fs.LoopbackRoot, _ *fs.Inode, _ string, _ *syscall.Stat_t) fs.InodeEmbedder {
-		n := &ServerNode{
+		n := &ClientNode{
 			LoopbackNode: fs.LoopbackNode{
 				RootData: rootData,
 			},

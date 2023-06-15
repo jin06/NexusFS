@@ -25,7 +25,7 @@ func runClient(cmd *cobra.Command, args []string) {
 	fuseName := config.Def.ClusterName + "_" + config.Def.NodeName
 	serverAddr := viper.GetString("server_address")
 
-	sfs, err := nfs.New(
+	sfs, err := nfs.NewClient(
 		nfs.MountPoint(mt),
 		nfs.LBPath(ld),
 		nfs.FSType(sType),

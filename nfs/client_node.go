@@ -9,12 +9,12 @@ import (
 	"syscall"
 )
 
-type ServerNode struct {
+type ClientNode struct {
 	fs.LoopbackNode
 	M *client.Manager
 }
 
-func (n *ServerNode) OnAdd(ctx context.Context) {
+func (n *ClientNode) OnAdd(ctx context.Context) {
 	logrus.Debug("OnAdd testing")
 }
 
@@ -24,23 +24,23 @@ func (n *ServerNode) OnAdd(ctx context.Context) {
 //	return fs.OK
 //}
 //
-var _ = (fs.NodeLookuper)((*ServerNode)(nil))
+var _ = (fs.NodeLookuper)((*ClientNode)(nil))
 
-func (n *ServerNode) Lookup(ctx context.Context, name string, out *fuse.EntryOut) (*fs.Inode, syscall.Errno) {
+func (n *ClientNode) Lookup(ctx context.Context, name string, out *fuse.EntryOut) (*fs.Inode, syscall.Errno) {
 	logrus.Debug("Lookup testing: ", name)
 	return n.LoopbackNode.Lookup(ctx, name, out)
 }
 
-var _ = (fs.NodeMknoder)((*ServerNode)(nil))
+var _ = (fs.NodeMknoder)((*ClientNode)(nil))
 
-func (n *ServerNode) Mknod(ctx context.Context, name string, mode, rdev uint32, out *fuse.EntryOut) (*fs.Inode, syscall.Errno) {
+func (n *ClientNode) Mknod(ctx context.Context, name string, mode, rdev uint32, out *fuse.EntryOut) (*fs.Inode, syscall.Errno) {
 	logrus.Debug("Mknod testing: ", name)
 	return n.LoopbackNode.Mknod(ctx, name, mode, rdev, out)
 }
 
-var _ = (fs.NodeMkdirer)((*ServerNode)(nil))
+var _ = (fs.NodeMkdirer)((*ClientNode)(nil))
 
-func (n *ServerNode) Mkdir(ctx context.Context, name string, mode uint32, out *fuse.EntryOut) (*fs.Inode, syscall.Errno) {
+func (n *ClientNode) Mkdir(ctx context.Context, name string, mode uint32, out *fuse.EntryOut) (*fs.Inode, syscall.Errno) {
 	logrus.Debug("Mkdir testing: ", name)
 	//c, er := api.NewClient(viper.GetString("server_address"))
 	//if er != nil {
@@ -69,17 +69,17 @@ func (n *ServerNode) Mkdir(ctx context.Context, name string, mode uint32, out *f
 //	return 0
 //}
 
-var _ = (fs.NodeRenamer)((*ServerNode)(nil))
+var _ = (fs.NodeRenamer)((*ClientNode)(nil))
 
-func (n *ServerNode) Rename(ctx context.Context, name string, newParent fs.InodeEmbedder, newName string, flags uint32) syscall.Errno {
+func (n *ClientNode) Rename(ctx context.Context, name string, newParent fs.InodeEmbedder, newName string, flags uint32) syscall.Errno {
 	logrus.Debugf("Rename testing: %s ---> %s", name, newName)
 	return n.LoopbackNode.Rename(ctx, name, newParent, newName, flags)
 }
 
 //
-var _ = (fs.NodeCreater)((*ServerNode)(nil))
+var _ = (fs.NodeCreater)((*ClientNode)(nil))
 
-func (n *ServerNode) Create(ctx context.Context, name string, flags uint32, mode uint32, out *fuse.EntryOut) (inode *fs.Inode, fh fs.FileHandle, fuseFlags uint32, errno syscall.Errno) {
+func (n *ClientNode) Create(ctx context.Context, name string, flags uint32, mode uint32, out *fuse.EntryOut) (inode *fs.Inode, fh fs.FileHandle, fuseFlags uint32, errno syscall.Errno) {
 	return n.LoopbackNode.Create(ctx, name, flags, mode, out)
 }
 
