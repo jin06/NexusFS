@@ -5,4 +5,6 @@ storage_type: loopback # loopback or db
 mountpoint: "/Users/jinlong/tmp/fuse/nexus1"
 lookback_dir: "/Users/jinlong/tmp/fuse/data1"
 server_address: 127.0.0.1:8880
+store_type: bolt
+bolt_path: nexus_client.db
 

@@ -5,3 +5,4 @@ storage_type: loopback # loopback or db
 mountpoint: "/Users/jinlong/tmp/fuse/nexus1"
 lookback_dir: "/Users/jinlong/tmp/fuse/data1"
 listen_address: :8880
+local_path: "/Users/jinlong/tmp/serverPath"

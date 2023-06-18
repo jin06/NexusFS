@@ -42,17 +42,9 @@ var _ = (fs.NodeMkdirer)((*ClientNode)(nil))
 
 func (n *ClientNode) Mkdir(ctx context.Context, name string, mode uint32, out *fuse.EntryOut) (*fs.Inode, syscall.Errno) {
 	logrus.Debug("Mkdir testing: ", name)
-	//c, er := api.NewClient(viper.GetString("server_address"))
-	//if er != nil {
-	//	logrus.Error(er)
-	//}
-	//if rpl, err := c.SayHello(context.TODO(), &api.HelloReq{Name: name});err!= nil {
-	//	logrus.Error(err)
-	//} else {
-	//	logrus.Debug(rpl.Reply)
-	//}
+
 	i, g, err := n.M.Mkdir(ctx, name, mode)
-	logrus.Debug("test resp :", i, g, err)
+	logrus.Debug("mkdir response test resp :", i, g, err)
 
 	return n.LoopbackNode.Mkdir(ctx, name, mode, out)
 }

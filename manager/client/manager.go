@@ -3,10 +3,13 @@ package client
 import (
 	"context"
 	"github.com/jin06/NexusFS/api"
+	"github.com/jin06/NexusFS/store"
+	"github.com/spf13/viper"
 )
 
 type Manager struct {
 	Conf
+	store.ClientStore
 }
 
 type Conf struct {
@@ -17,6 +20,13 @@ func NewManager(conf Conf) (*Manager, error) {
 	m := &Manager{
 		Conf: conf,
 	}
+	boltPaht := viper.GetString("bolt_path")
+	s, err := store.NewClientStore(store.BoltStoreVal(boltPaht))
+	if err != nil {
+		return nil, err
+	}
+	m.ClientStore = s
+
 	return m, nil
 }
 

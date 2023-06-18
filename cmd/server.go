@@ -23,7 +23,7 @@ var serverCmd = &cobra.Command{
 func runServer(cmd *cobra.Command, args []string) {
 	fmt.Println("hello, server running")
 	addr := viper.GetString("listen_address")
-	logrus.Debug("ruuning addr: " , addr)
+	logrus.Debug("ruuning addr: ", addr)
 	err := runApiServer(addr)
 	panic(err)
 }
@@ -34,7 +34,8 @@ func runApiServer(addr string) (err error) {
 		return
 	}
 	srv := api.NewServer()
-	fsService := handlers.NewFS()
+	path := viper.GetString("local_path")
+	fsService := handlers.NewFS(path)
 	gServer := grpc.NewServer()
 	api.RegisterHelloServer(gServer, srv)
 	api.RegisterFSServer(gServer, fsService)
