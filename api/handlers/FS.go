@@ -17,6 +17,7 @@ func NewFS(path string) *FS {
 	fs := &FS{
 	}
 	fs.LocalFS = afero.NewBasePathFs(afero.NewOsFs(), path)
+
 	return fs
 }
 

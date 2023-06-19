@@ -27,7 +27,7 @@ func (n *ClientNode) OnAdd(ctx context.Context) {
 var _ = (fs.NodeLookuper)((*ClientNode)(nil))
 
 func (n *ClientNode) Lookup(ctx context.Context, name string, out *fuse.EntryOut) (*fs.Inode, syscall.Errno) {
-	logrus.Debug("Lookup testing: ", name)
+	//logrus.Debug("Lookup testing: ", name)
 	return n.LoopbackNode.Lookup(ctx, name, out)
 }
 
@@ -105,13 +105,15 @@ func (n *ClientNode) Create(ctx context.Context, name string, flags uint32, mode
 //func (n *ServerNode) Opendir(ctx context.Context) syscall.Errno {
 //	return 0
 //}
-//
-//var _ = (fs.NodeReaddirer)((*ServerNode)(nil))
-//
-//func (n *ServerNode) Readdir(ctx context.Context) (fs.DirStream, syscall.Errno) {
-//	logrus.Debug("Readdir testing")
-//	return nil, 0
-//}
+
+var _ = (fs.NodeReaddirer)((*ClientNode)(nil))
+
+func (n *ClientNode) Readdir(ctx context.Context) (fs.DirStream, syscall.Errno) {
+	logrus.Debug("Readdir testing")
+	dirStream, err := n.LoopbackNode.Readdir(ctx)
+	return dirStream, err
+}
+
 //
 //var _ = (fs.NodeGetattrer)((*ServerNode)(nil))
 //

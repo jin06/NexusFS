@@ -47,3 +47,7 @@ func (s *boltStore) Connect() error {
 func (s *boltStore) Disconnect() error {
 	return s.db.Close()
 }
+
+func (s *boltStore) PutDir() {
+
+}
