@@ -7,8 +7,10 @@ fi
 
 PRO_ROOT="${PWD}"
 PRO_PATH="${PRO_ROOT}/api/"
+PRO_OUT="${PRO_ROOT}/api/"
 
-protoc --go_out=plugins=grpc:. \
+protoc  \
+  --proto_path=${PRO_PATH} \
+  --go_out=plugins=grpc:${PRO_OUT} \
   --go_opt=paths=source_relative \
-  -I="${PRO_PATH}" \
   ${PRO_PATH}*.proto
